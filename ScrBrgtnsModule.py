@@ -4,8 +4,8 @@ import math
 import time
 import screen_brightness_control as sbc
 
-class WifiCtrl():
-    def Wifi(self):
+class ScrBrgtns():
+    def ScrBrgtns(self):
         #############################################################
 
         #############################################################
@@ -61,8 +61,8 @@ class WifiCtrl():
         cv2.destroyAllWindows()
 
 def main():
-    object = WifiCtrl()
-    object.Wifi()
+    object = ScrBrgtns()
+    object.ScrBrgtns()
 
 if __name__ == "__main__":
     main()
