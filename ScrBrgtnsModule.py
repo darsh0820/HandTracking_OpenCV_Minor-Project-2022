@@ -22,7 +22,7 @@ class ScrBrgtns():
             success, img = cap.read()
             img = detector.findHands(img)
             lmList = detector.findPosition(img, draw=False)
-            x = 0
+            x = 20
             # sbc.set_brightness(50)
             if len(lmList) != 0:
 
@@ -44,6 +44,12 @@ class ScrBrgtns():
                 length3 = math.hypot(x4 - x1, y4 - y1)
                 if length3 < 30:
                     sbc.set_brightness(x-20)
+                
+                x5, y5 = lmList[12][1], lmList[12][2]
+                cv2.line(img, (x1, y1,), (x5, y5), (255, 0, 255), 3)
+                length4 = math.hypot(x5-x1, y5-y1)
+                if length4 < 20:
+                    sbc.set_brightness(50)
 
             cTime = time.time()
             fps = 1 / (cTime - pTime)
