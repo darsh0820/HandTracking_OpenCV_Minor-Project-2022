@@ -16,14 +16,15 @@ class WifiCtrl():
         assert iface.status() in \
                [const.IFACE_DISCONNECTED, const.IFACE_INACTIVE]
 
-        profile = pywifi.Profile()
-        profile.ssid = 'Darsh'
-        profile.auth = const.AUTH_ALG_OPEN
-        profile.akm.append(const.AKM_TYPE_WPA2PSK)
-        profile.cipher = const.CIPHER_TYPE_CCMP
-        profile.key = None
+        wifiId = pywifi.Profile()
+        wifiId.ssid = 'Ridhim'
+        wifiId.akm.append(const.AKM_TYPE_WPA2PSK)
+        wifiId.auth = const.AUTH_ALG_OPEN
+        wifiId.key = 'abcde'
+        wifiId.cipher = const.CIPHER_TYPE_CCMP
+       
 
-        tmp_profile = iface.add_network_profile(profile)
+        temp = iface.add_network_profile(wifiId)
         #############################################################
 
         wCam, hCam = 640, 480
@@ -45,8 +46,8 @@ class WifiCtrl():
                 x2, y2 = lmList[8][1], lmList[8][2]
                 cv2.line(img, (x1, y1), (x2, y2), (255, 0, 255), 3)
                 length1 = math.hypot(x2 - x1, y2 - y1)
-                if length1 < 30:
-                    iface.connect(tmp_profile)
+                if length1 < 20:
+                    iface.connect(temp)
                     time.sleep(1)
                     assert iface.status() == const.IFACE_CONNECTED
 
@@ -60,7 +61,7 @@ class WifiCtrl():
                 x4, y4 = lmList[16][1], lmList[16][2]
                 cv2.line(img, (x1, y1), (x4, y4), (255, 0, 255), 3)
                 length3 = math.hypot(x4 - x1, y4 - y1)
-                if length3 < 30:
+                if length3 < 20:
                     iface.disconnect()
                     time.sleep(1)
                     assert iface.status() in \
